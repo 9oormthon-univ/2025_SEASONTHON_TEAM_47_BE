@@ -18,6 +18,17 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+
+	// 🔥 전역 exclude: 로그 충돌 원인 제거 (아주 중요)
+	all {
+		// Spring Boot 기본 로깅(Logback) 스타터 제거
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+		// Logback 자체 제거
+		exclude group: 'ch.qos.logback', module: 'logback-classic'
+		exclude group: 'ch.qos.logback', module: 'logback-core'
+		// Log4j → SLF4J 브리지 제거 (우리는 SLF4J → Log4j2만 사용)
+		exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
+	}
 }
 
 repositories {
@@ -25,15 +36,35 @@ repositories {
 }
 
 dependencies {
+	// --- Spring starters ---
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+	// implementation 'org.springframework.boot:spring-boot-starter-security' 필요할 떄 사용
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//implementation 'org.springframework.boot:spring-boot-starter-webflux'   // WebClient
+	implementation 'org.springframework:spring-webflux'
+
+	// --- OpenAPI / Swagger UI ---
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+
+	// --- JSON ---
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+	// --- Logging: Log4j2 사용 ---
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+
+	// --- Lombok ---
 	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// --- DB Drivers ---
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	runtimeOnly 'com.h2database:h2'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// --- Tests (테스트에서도 로깅 스타터 제외) ---
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
