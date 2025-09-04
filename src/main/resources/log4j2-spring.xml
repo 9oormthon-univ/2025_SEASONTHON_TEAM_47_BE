@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Log4j2 설정 파일(스프링에서 log4j2-spring.xml 이름을 자동 인식) -->
+<Configuration status="INFO" monitorInterval="30"> <!-- 설정 변경 모니터링(초) -->
+    <Properties>
+        <Property name="APP_NAME">${spring:application:name:-app}</Property> <!-- 앱 이름 -->
+        <Property name="LOG_PATTERN">%d{HH:mm:ss.SSS} [%t] %-5level ${APP_NAME} %c{1} - %msg%n</Property> <!-- 콘솔 포맷 -->
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">          <!-- 콘솔 출력 -->
+            <PatternLayout pattern="${LOG_PATTERN}"/>         <!-- 패턴 적용 -->
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.example.goEuro" level="debug" additivity="false"> <!-- 우리 코드 디버그 -->
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="org.springframework.web" level="info" additivity="false"> <!-- 스프링 웹은 info -->
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="org.springframework.web.reactive.function.client" level="warn" additivity="false"> <!-- WebClient 상세 로그 억제 -->
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Root level="info">                                     <!-- 기본은 info -->
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

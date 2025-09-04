@@ -1,13 +1,17 @@
 spring:
+  main:
+    web-application-type: servlet
   application:
     name: goEuro
   config:
     import: optional:file:.env[.properties]
-
   h2:
     console:
       enabled: true
       path: /h2-console
+  mvc:  #런타임 시간 조절
+    async:
+      request-timeout: 600s  # 기본 ~30초 → 60초로
 
   datasource:
     driver-class-name: org.h2.Driver
@@ -22,6 +26,25 @@ spring:
       hibernate:
         format_sql: true
     show-sql: true
+
+ai:
+  gemini:
+    apiKey: ${GEMINI_API_KEY}
+    model: ${GEMINI_MODEL}
+    baseUrl: ${GEMINI_BASE_URL}
+
+# Swagger UI 접근 경로 설정
+springdoc:
+  swagger-ui:
+    path: /swagger-ui                    # Swagger UI: http://localhost:8080/swagger-ui
+  api-docs:
+    path: /v3/api-docs                   # OpenAPI 문서 JSON: /v3/api-docs
+
+
+# CORS 허용(개발용: 프론트 로컬 호스트)
+app:
+  cors:
+    origins: "http://localhost:8080, http://localhost:5173"     # 필요 시 ,로 여러 도메인 추가
 
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
