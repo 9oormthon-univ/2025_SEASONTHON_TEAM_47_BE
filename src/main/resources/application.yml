@@ -11,13 +11,13 @@ spring:
       path: /h2-console
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb   # 메모리 DB (앱 껐다 켜면 초기화)
+    url: jdbc:h2:file:./data/testdb;DB_CLOSE_ON_EXIT=FALSE   # 파일기반으로 데이터 남겨둠
     username: sa
     password:
 
   mvc:  #런타임 시간 조절
     async:
-      request-timeout: 600s  # 기본 ~30초 → 60초로
+      request-timeout: 600s
 
   jpa:
     hibernate:
