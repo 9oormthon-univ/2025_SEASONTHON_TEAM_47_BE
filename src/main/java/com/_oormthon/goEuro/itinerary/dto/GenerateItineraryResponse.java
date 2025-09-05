@@ -1,4 +1,4 @@
-package com._oormthon.goEuro.itineary.dto;
+package com._oormthon.goEuro.itinerary.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

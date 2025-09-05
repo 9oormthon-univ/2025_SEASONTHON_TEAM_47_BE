@@ -1,4 +1,4 @@
-package com._oormthon.goEuro.itineary.dto;
+package com._oormthon.goEuro.itinerary.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

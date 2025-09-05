@@ -1,6 +1,6 @@
-package com._oormthon.goEuro.itineary.service;
+package com._oormthon.goEuro.itinerary.service;
 
-import com._oormthon.goEuro.itineary.dto.GenerateItineraryRequest;
+import com._oormthon.goEuro.itinerary.dto.GenerateItineraryRequest;
 import org.springframework.stereotype.Component;
 
 @Component // 스프링 빈

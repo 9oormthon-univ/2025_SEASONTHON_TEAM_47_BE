@@ -1,8 +1,8 @@
-package com._oormthon.goEuro.itineary.controller;
+package com._oormthon.goEuro.itinerary.controller;
 
-import com._oormthon.goEuro.itineary.dto.GenerateItineraryRequest;
-import com._oormthon.goEuro.itineary.dto.GenerateItineraryResponse;
-import com._oormthon.goEuro.itineary.service.ItineraryService;
+import com._oormthon.goEuro.itinerary.dto.GenerateItineraryRequest;
+import com._oormthon.goEuro.itinerary.dto.GenerateItineraryResponse;
+import com._oormthon.goEuro.itinerary.service.ItineraryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

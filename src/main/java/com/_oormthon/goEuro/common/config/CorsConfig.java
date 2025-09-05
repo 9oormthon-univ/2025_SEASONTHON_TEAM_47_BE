@@ -12,7 +12,7 @@ public class CorsConfig {
 
     @Bean                                               // WebMvcConfigurer 빈 등록
     public WebMvcConfigurer corsConfigurer(
-            @Value("${app.cors.origins}") String origins // 허용 도메인
+            @Value("${app.cors.origins}, http://localhost:3000") String origins // 허용 도메인
     ) {
         return new WebMvcConfigurer() {                 // 익명 구현체 반환
             @Override

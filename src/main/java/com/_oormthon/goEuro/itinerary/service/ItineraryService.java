@@ -1,8 +1,8 @@
-package com._oormthon.goEuro.itineary.service;
+package com._oormthon.goEuro.itinerary.service;
 
-import com._oormthon.goEuro.itineary.infra.GeminiClient;
-import com._oormthon.goEuro.itineary.dto.GenerateItineraryRequest;
-import com._oormthon.goEuro.itineary.dto.GenerateItineraryResponse;
+import com._oormthon.goEuro.itinerary.infra.GeminiClient;
+import com._oormthon.goEuro.itinerary.dto.GenerateItineraryRequest;
+import com._oormthon.goEuro.itinerary.dto.GenerateItineraryResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

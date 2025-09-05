@@ -1,4 +1,4 @@
-package com._oormthon.goEuro.itineary.infra;
+package com._oormthon.goEuro.itinerary.infra;
 
 import com._oormthon.goEuro.common.config.GeminiProperties;
 import lombok.RequiredArgsConstructor;
