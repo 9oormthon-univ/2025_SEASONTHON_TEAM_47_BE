@@ -1,0 +1,7 @@
+services:
+  app:
+    image: go-euro-app   # 이미 있는 이미지 사용
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
