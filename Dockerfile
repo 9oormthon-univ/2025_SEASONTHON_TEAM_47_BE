@@ -2,11 +2,17 @@
 FROM gradle:8.14.3-jdk17 AS builder
 WORKDIR /home/gradle/project
 COPY --chown=gradle:gradle . .
-RUN gradle clean build --no-daemon
+
+# ✅ BuildKit 캐시 + 테스트 스킵
+RUN --mount=type=cache,target=/home/gradle/.gradle \
+    gradle clean build -x test --no-daemon
 
 # Run stage
 FROM openjdk:17-jdk-slim
 WORKDIR /app
-COPY --from=builder /home/gradle/project/build/libs/goEuro-0.0.1-SNAPSHOT.jar app.jar
+
+# ✅ 빌드된 JAR를 와일드카드로 복사 (이름 바뀌어도 안전)
+COPY --from=builder /home/gradle/project/build/libs/*SNAPSHOT.jar app.jar
+
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
