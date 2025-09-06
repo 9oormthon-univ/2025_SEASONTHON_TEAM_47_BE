@@ -20,6 +20,9 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
+# H2 Database files
+data/
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
