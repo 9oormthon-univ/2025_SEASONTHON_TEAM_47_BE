@@ -3,6 +3,8 @@ package com._oormthon.goEuro.itinerary.service;
 import com._oormthon.goEuro.itinerary.dto.GenerateItineraryRequest;
 import org.springframework.stereotype.Component;
 
+import static org.apache.commons.lang3.ArrayUtils.nullToEmpty;
+
 @Component // 스프링 빈
 public class PromptBuilder {
 
@@ -59,9 +61,9 @@ public class PromptBuilder {
                 req.getPurpose(),
                 req.getTheme(),
                 req.getParty(),
-                nullToEmpty(req.getFlightInfo()),
-                nullToEmpty(req.getAccommodationInfo()),
-                nullToEmpty(req.getPreferInfo())
+                req.getFlightInfo(),
+                req.getAccommodationInfo(),
+                req.getPreferInfo()
         );
     }
 }
