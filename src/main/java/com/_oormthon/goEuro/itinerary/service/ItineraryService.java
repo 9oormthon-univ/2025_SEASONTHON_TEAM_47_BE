@@ -22,7 +22,7 @@ public class ItineraryService {
 
     public Mono<GenerateItineraryResponse> generate(GenerateItineraryRequest req) {
         String prompt = promptBuilder.build(req);
-        log.debug("[Itinerary] generating for city={}, days={}", req.getCity(), req.getDays());
+        log.debug("[Itinerary] generating for city={}, days={}", req.getStart(), req.getEnd(), req.getDays());
 
         return geminiClient.generateContent(prompt)
                 .map(json -> {
