@@ -37,8 +37,6 @@ public class GenerateItineraryResponse {
         private String category;
         private String time;
         private String address;
-        private Double lat;
-        private Double lng;
         private String note;
     }
 }
