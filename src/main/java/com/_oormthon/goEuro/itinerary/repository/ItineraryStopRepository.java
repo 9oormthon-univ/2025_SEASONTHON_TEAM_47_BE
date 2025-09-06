@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ItineraryStopRepository extends JpaRepository<ItineraryStop, Long> {
     List<ItineraryStop> findAllByItineraryItineraryIdOrderByDayDayIdAscSortOrderAsc(Long itineraryId);
+    List<ItineraryStop> findAllByItineraryItineraryIdAndDayDayIdOrderBySortOrderAsc(Long itineraryId, Long dayId);
 }
