@@ -48,6 +48,7 @@ public class ItineraryStopQueryService {
         return ItineraryStopListResponse.Item.builder()
                 .name(s.getName())
                 .address(s.getAddress())
+                .categoryCode(s.getCategoryCode())
                 .startTime(s.getStartTime())
                 .endTime(s.getEndTime())
                 .build();
