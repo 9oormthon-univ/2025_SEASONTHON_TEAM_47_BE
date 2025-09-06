@@ -4,6 +4,7 @@ package com._oormthon.goEuro.itinerary.dto;
 import java.util.List;
 
 public record AiItinerarySaveDTO(   // record는 불변 타입 final이랑 비슷
+        String title,
         String city,
         int days,
         String currency,

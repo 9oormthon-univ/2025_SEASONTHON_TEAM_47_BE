@@ -1,19 +1,18 @@
 // com/_oormthon/goEuro/itinerary/controller/ItineraryPersistController.java
 package com._oormthon.goEuro.itinerary.controller;
 
-import com._oormthon.goEuro.member.dto.ApiResponse;
+import com._oormthon.goEuro.itinerary.dto.GenerateItineraryRequest;
 import com._oormthon.goEuro.itinerary.service.ItineraryPersistService;
+import com._oormthon.goEuro.member.dto.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
-import java.time.LocalDate;
-import java.util.List;
-
+@Tag(name = "Itinerary", description = "일정 생성/저장 API")
 @RestController
 @RequestMapping("/api/itineraries")
 @RequiredArgsConstructor
@@ -21,34 +20,16 @@ public class ItineraryPersistController {
 
     private final ItineraryPersistService persistService;
 
-    @Operation(summary = "일정 생성+저장", description = "LLM으로 생성한 일정을 DB(ERD) 구조에 저장하고 itinerary_id 반환")
-    @PostMapping("/generate-and-save")
-    public Mono<ApiResponse<Long>> generateAndSave(@RequestBody SaveRequest req) {
-        return persistService.generateAndSave(
-                        req.getUserId(),
-                        req.getCity(),
-                        req.getDays(),
-                        req.getStartDate(),
-                        req.getMonth(),
-                        req.getInterests(),
-                        req.getPace(),
-                        req.getBudget(),
-                        req.getTravelerType()
-                )
+    @Operation(
+            summary = "일정 생성+저장",
+            description = "설문(출·도착, 날짜, 목적/테마/일행, 항공/숙소/선호)을 바탕으로 LLM 일정을 생성하고 ERD에 저장합니다. itinerary_id 반환"
+    )
+    @PostMapping(value = "/generate-and-save", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Mono<ApiResponse<Long>> generateAndSave(
+            @RequestParam("userId") Long userId,                     // 인증 연동 전 임시
+            @Valid @RequestBody GenerateItineraryRequest req         // 본문 DTO 그대로 서비스로
+    ) {
+        return persistService.generateAndSave(userId, req)
                 .map(id -> ApiResponse.onSuccess("saved", id));
-    }
-
-    @Data
-    public static class SaveRequest {
-        @NotNull private Long userId;          // member.id
-        @NotNull private String city;
-        @NotNull private Integer days;
-        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-        private LocalDate startDate;           // day1 기준일
-        private String month;
-        private List<String> interests;
-        private String pace;
-        private String budget;
-        private String travelerType;
     }
 }

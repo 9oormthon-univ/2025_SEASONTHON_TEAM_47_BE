@@ -9,6 +9,7 @@ import java.util.List;
 
 @Data // getter/setter 자동 생성
 public class GenerateItineraryRequest {
+
     @NotBlank(message = "출발지는 필수입니다.")
     private String start; // 출발 공항명
 
