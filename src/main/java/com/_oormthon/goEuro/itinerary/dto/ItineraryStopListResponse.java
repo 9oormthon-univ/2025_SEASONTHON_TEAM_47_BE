@@ -32,6 +32,9 @@ public class ItineraryStopListResponse {
         @JsonProperty("address")
         private String address;
 
+        @JsonProperty("category_code")
+        private String categoryCode;
+
         @JsonProperty("start_time")
         @JsonFormat(pattern = "HH:mm")
         private LocalTime startTime;
