@@ -22,8 +22,9 @@ spring:
       request-timeout: 600s
 
   jpa:
+    defer-datasource-initialization: true
     hibernate:
-      ddl-auto: update   # 엔티티에 맞춰 테이블 생성/수정
+      ddl-auto: create   # 엔티티에 맞춰 테이블 생성/수정
     properties:
       hibernate:
         format_sql: true

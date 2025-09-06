@@ -32,6 +32,8 @@ public class PersistPromptBuilder {
         JSON 스키마(예시 형태, 실제 값으로 채우기):
         {
           "title": "",                // 여행 컨셉에 맞는 제목 (문자열)
+          "startDate":"",             // 여행 시작 날짜(문자열)
+          "endDate":"",              // 여행 마지막 날짜(문자열)
           "city": "",                 // 주요 방문 도시 (문자열)
           "days": 0,                  // 총 여행 일수 (정수)
           "currency": "EUR",          // 통화 코드 (예: EUR, USD, KRW)

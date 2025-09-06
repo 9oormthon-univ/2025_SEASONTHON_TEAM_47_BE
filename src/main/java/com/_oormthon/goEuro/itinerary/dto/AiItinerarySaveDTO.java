@@ -5,6 +5,8 @@ import java.util.List;
 
 public record AiItinerarySaveDTO(   // record는 불변 타입 final이랑 비슷
         String title,
+        String startDate,
+        String endDate,
         String city,
         int days,
         String currency,

@@ -62,6 +62,8 @@ public class ItineraryPersistService {
         try {
             JsonNode root = om.readTree(json);
             String title = getText(root, "title", "여행 계획");
+            String startDate = getText(root, "startDate", "<UNK> <UNK>");
+            String endDate = getText(root, "endDate", "<UNK> <UNK>");
             String city = getText(root, "city", "unknown");
             int days   = getInt(root, "days", 1);
             String cur = getText(root, "currency", "EUR");
@@ -106,7 +108,7 @@ public class ItineraryPersistService {
                 tipsArr.forEach(t -> tips.add(t.asText("")));
             }
 
-            return new AiItinerarySaveDTO(title, city, days, cur, plans, tips);
+            return new AiItinerarySaveDTO(title,startDate,endDate, city, days, cur, plans, tips);
         } catch (Exception e) {
             log.warn("toSaveDto parse error: {}", e.toString());
             throw new RuntimeException("Invalid model response JSON", e);
@@ -137,6 +139,9 @@ public class ItineraryPersistService {
         Itinerary it = itineraryRepository.save(
                 Itinerary.builder()
                         .user(user)
+                        .title(ai.title())
+                        .startDate(ai.startDate())
+                        .endDate(ai.endDate())
                         .city(ai.city())
                         .days(ai.days())
                         .currency(ai.currency() == null ? "EUR" : ai.currency())

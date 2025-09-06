@@ -12,6 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 public class GenerateItineraryResponse {
     private String title;
+    private String startDate;
+    private String endDate;
     private String city;
     private int days;
     private String currency;

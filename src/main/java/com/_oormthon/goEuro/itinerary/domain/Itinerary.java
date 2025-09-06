@@ -20,6 +20,15 @@ public class Itinerary extends BaseTimeEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private Member user;
 
+    @Column
+    private String title;
+
+    @Column
+    private String startDate;
+
+    @Column
+    private String endDate;
+
     @Column(length = 60, nullable = false)
     private String city;
 
