@@ -76,4 +76,7 @@ public class PersistPromptBuilder {
                 req.getPreferInfo()
         );
     }
+    private String toPromptValue(String value) {
+        return (value == null || value.isBlank()) ? "정보 없음" : value;
+    }
 }
